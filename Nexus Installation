@@ -1,0 +1,19 @@
+#!/bin/bash
+#Launch RHEL t2.med 
+Sudo useradd username
+echo "username ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
+sudo su username
+cd /opt
+sudo yum install wget git nano unzip -y
+sudo yum install java-11-openjdk-devel java-1.8.0-openjdk-devel -y
+sudo wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+sudo tar -xvf nexus.tar.gz
+sudo mv nexus-3* nexus
+udo chown -R username:username /opt/nexus
+sudo chown -R username:username /opt/sonatype-work
+sudo chmod -R 775 /opt/nexus
+sudo chmod -R 775 /opt/sonatype-work
+sudo ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+#add username
+sudo systemctl enable nexus
+sudo systemctl start nexus
