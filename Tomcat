@@ -1,0 +1,12 @@
+#!/bin/bash
+#Launch Rhel8 t.2micro is good enough
+cd /opt
+sudo yum install unzip wget -y
+sudo yum install java-1.8.0-openjdk-devel -y
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.tar.gz
+tar -xvf apache-tomcat-9.0.68.tar.gz
+rm apache-tomcat-9.0.68.tar.gz
+mv apache-tomcat-9.0.68 tomcat9
+sh /opt/tomcat9/bin/startup.sh
+ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat
+ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat
