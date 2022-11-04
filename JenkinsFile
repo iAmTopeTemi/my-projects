@@ -1,0 +1,12 @@
+//Scripted
+node(""){
+def MHD = tool name: "maven3.8.6"
+stage('GitClone'){
+sh "echo this is git clone"
+git 'https://github.com/iAmTopeTemi/web-apptosin.git'
+}
+stage('Build'){
+sh "echo start of build"
+sh "${MHD}/bin/mvn package"
+}
+}
